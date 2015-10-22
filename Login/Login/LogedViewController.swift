@@ -11,6 +11,7 @@ import FBSDKLoginKit
 
 class LogedViewController: UIViewController {
     let userName = "login"
+    let tweetName = "tweetName"
     let facebookMail = "facebookMail"
     let facebookName = "facebookName"
     let facebookUrlPicture = "facebookPictureUrl"
@@ -30,6 +31,9 @@ class LogedViewController: UIViewController {
         
         let defaults = NSUserDefaults.standardUserDefaults()
         
+        if let nameFb =  defaults.valueForKey(tweetName) as? String{
+            labelFbName.text = "Meno: " + nameFb
+        }
         if let mailFb = defaults.valueForKey(facebookMail) as? String{
             labelFbMail.text = "Mail: " + mailFb
         }
@@ -51,7 +55,6 @@ class LogedViewController: UIViewController {
     
     
     @IBAction func logOut(sender: AnyObject) {
-        print("asfasf")
         let alert = UIAlertController(title: "Log Out", message: "Naozaj sa chcete odhlásiť?", preferredStyle: UIAlertControllerStyle.Alert)
         let callActionHandler = { (action:UIAlertAction!) -> Void in
             if (FBSDKAccessToken.currentAccessToken() != nil)
@@ -64,6 +67,7 @@ class LogedViewController: UIViewController {
             defaults.setObject(nil, forKey: self.userName)
             defaults.setObject(nil, forKey: self.facebookMail)
             defaults.setObject(nil, forKey: self.facebookName)
+            defaults.setObject(nil, forKey: self.tweetName)
             defaults.setObject(nil, forKey: self.facebookUrlPicture)
             
             

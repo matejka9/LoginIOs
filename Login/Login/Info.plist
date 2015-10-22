@@ -2,51 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-
-<key>CFBundleURLTypes</key>
-<array>
-  <dict>
-    <key>CFBundleURLSchemes</key>
-    <array>
-      <string>fb436923059842641</string>
-    </array>
-  </dict>
-</array>
-<key>FacebookAppID</key>
-<string>436923059842641</string>
-<key>FacebookDisplayName</key>
-<string>Login</string>
-
-<key>NSAppTransportSecurity</key>
-<dict>
-  <key>NSExceptionDomains</key>
-  <dict>
-    <key>facebook.com</key>
-    <dict>
-      <key>NSIncludesSubdomains</key> <true/>        
-      <key>NSThirdPartyExceptionRequiresForwardSecrecy</key> <false/>
-    </dict>
-    <key>fbcdn.net</key>
-    <dict>
-      <key>NSIncludesSubdomains</key> <true/>
-      <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>  <false/>
-    </dict>
-    <key>akamaihd.net</key>
-    <dict>
-      <key>NSIncludesSubdomains</key> <true/>
-      <key>NSThirdPartyExceptionRequiresForwardSecrecy</key> <false/>
-    </dict>
-  </dict>
-</dict>
-
-<key>LSApplicationQueriesSchemes</key>
-<array>
-        <string>fbapi</string>
-        <string>fb-messenger-api</string>
-        <string>fbauth2</string>
-        <string>fbshareextension</string>
-</array>
-
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -63,10 +18,76 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb436923059842641</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>2c6e19ed56ceffdd1c4e07576118e39bfa5136ce</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict>
+					<key>consumerKey</key>
+					<string>xl2qH6lIw6MA2aWce9cqxYV5G</string>
+					<key>consumerSecret</key>
+					<string>FiOzAPsVK4qI3HTFqHZ61RIdMa6vWa8QK3HoU7hFclYyQxIGA6</string>
+				</dict>
+				<key>KitName</key>
+				<string>Twitter</string>
+			</dict>
+		</array>
+	</dict>
+	<key>FacebookAppID</key>
+	<string>436923059842641</string>
+	<key>FacebookDisplayName</key>
+	<string>Login</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>akamaihd.net</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<false/>
+			</dict>
+			<key>facebook.com</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<false/>
+			</dict>
+			<key>fbcdn.net</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<false/>
+			</dict>
+		</dict>
+	</dict>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

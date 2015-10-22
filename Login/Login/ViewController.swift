@@ -12,6 +12,7 @@ import FBSDKLoginKit
 
 class ViewController: UIViewController {
     let userName = "login"
+    let tweetName = "tweetName"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +22,8 @@ class ViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         let defaults = NSUserDefaults.standardUserDefaults()
         let name = defaults.stringForKey(self.userName)
-        if (FBSDKAccessToken.currentAccessToken() != nil || name != nil)
+        let tweetName = defaults.stringForKey(self.tweetName)
+        if (FBSDKAccessToken.currentAccessToken() != nil || name != nil || tweetName != nil)
         {
             // User is already logged in, do work such as go to next view controller.
             self.performSegueWithIdentifier("prejdiNaLoged", sender: self)

@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import FBSDKLoginKit
+import TwitterKit
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     let userName = "login"
@@ -26,10 +27,36 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         //FB Button
         let loginView : FBSDKLoginButton = FBSDKLoginButton()
         self.view.addSubview(loginView)
-        let bounds = self.view.bounds;
-        loginView.center = CGPointMake(bounds.midX, bounds.maxY - loginView.bounds.height)
+        let bounds = self.view.bounds
+        loginView.frame = CGRectMake(bounds.maxX, bounds.maxY - loginView.bounds.height, bounds.maxX/2 - 20.0, loginView.frame.height)
+        loginView.center = CGPointMake(bounds.midX - bounds.maxX/4, bounds.maxY - loginView.bounds.height)
         loginView.readPermissions = ["public_profile", "email"]
         loginView.delegate = self
+        
+    
+        
+        
+        //Twitter login button
+        let logInButton = TWTRLogInButton(logInCompletion: { session, error in
+            if (session != nil) {
+                let defaults = NSUserDefaults.standardUserDefaults()
+                defaults.setObject(session!.userName, forKey: "tweetName")
+        
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.performSegueWithIdentifier("pouziTweetLogin", sender: self)
+                })
+            } else {
+                print("error: \(error!.localizedDescription)");
+            }
+        })
+        
+        let view = logInButton.subviews.last
+        let label = view!.subviews.first as! UILabel
+        label.text = "Log in"
+        logInButton.frame = CGRectMake(bounds.maxX, bounds.maxY + loginView.bounds.height, bounds.maxX/2 - 20.0, loginView.frame.height)
+        logInButton.center = CGPointMake(bounds.midX + bounds.maxX/4, bounds.maxY - loginView.bounds.height)
+        self.view.addSubview(logInButton)
     }
 
     

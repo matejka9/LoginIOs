@@ -439,6 +439,7 @@
                         <outlet property="login" destination="EB4-d7-Dhz" id="8WI-7N-I8P"/>
                         <segue destination="fsR-EL-8eA" kind="modal" identifier="pouziLogin" id="z03-dz-gSp"/>
                         <segue destination="fsR-EL-8eA" kind="modal" identifier="pouziFbLogin" id="NgQ-Dl-2is"/>
+                        <segue destination="fsR-EL-8eA" kind="modal" identifier="pouziTweetLogin" id="nVg-N9-vWT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hfg-F1-49M" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -547,6 +548,6 @@
         <image name="mainBackground" width="478" height="754"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NgQ-Dl-2is"/>
+        <segue reference="nVg-N9-vWT"/>
     </inferredMetricsTieBreakers>
 </document>
