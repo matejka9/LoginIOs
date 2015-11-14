@@ -21,7 +21,7 @@ PODS:
     - FBSDKCoreKit
   - FBSDKShareKit (4.7.0):
     - FBSDKCoreKit
-  - IQKeyboardManagerSwift (3.3.2)
+  - IQKeyboardManagerSwift (3.3.4)
   - TwitterCore (1.12.0)
   - TwitterKit (1.12.0)
 
@@ -30,7 +30,7 @@ DEPENDENCIES:
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
-  - IQKeyboardManagerSwift
+  - IQKeyboardManagerSwift (= 3.3.4)
   - TwitterCore
   - TwitterKit
 
@@ -40,7 +40,7 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: eb580bfc2040ad44f4c0b4f4d0befb1d35bce59c
   FBSDKLoginKit: 01bce8dd3f3a26a023b0ba4ffdde7ef5062889fe
   FBSDKShareKit: 1f927bb05e4d36a99d5d5bf2f4b1ff294ce3e15c
-  IQKeyboardManagerSwift: 40a9f6a3a5f60bc311aad5ab3265b9de5ecb9367
+  IQKeyboardManagerSwift: 6f2290d093f5269dc07bdae8bc58e968cf9c4738
   TwitterCore: a1feadb793512962003ed2bad23e846c8daa4efd
   TwitterKit: c27e7b997cd82d5c626fcfd8b1dead1e15dac7ca
 

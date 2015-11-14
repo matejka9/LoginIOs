@@ -2,7 +2,7 @@
 use_frameworks!
 
 target 'Login' do
-  pod 'IQKeyboardManagerSwift'
+  pod 'IQKeyboardManagerSwift', '3.3.4'
   pod 'FBSDKCoreKit'
   pod 'FBSDKLoginKit'
   pod 'FBSDKShareKit'
