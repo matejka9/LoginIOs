@@ -12,4 +12,10 @@ class HubbleCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     
+    @IBOutlet weak var cellIndicator: UIActivityIndicatorView!{
+        didSet{
+            cellIndicator.hidden = false
+            cellIndicator.startAnimating()
+        }
+    }
 }

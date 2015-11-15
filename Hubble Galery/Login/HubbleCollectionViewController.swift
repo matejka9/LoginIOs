@@ -16,48 +16,55 @@ class HubbleCollectionViewController: UICollectionViewController {
 
     @IBOutlet var gridView: UICollectionView!
     
+    @IBOutlet weak var indikator: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let qos = Int(QOS_CLASS_USER_INTERACTIVE.rawValue)
             
         let query = PFQuery(className: "HubbleGallery")
+        indikator.startAnimating()
         query.findObjectsInBackgroundWithBlock() { (objects, error) in
             dispatch_async(dispatch_get_global_queue(qos, 0)) {
                 if error == nil {
                     // success
-                    print("fetched \(objects?.count) objects")
+                    let pocetZaznamov = objects!.count
+                    for _ in 0...pocetZaznamov - 1{
+                        self.imageGallery.images.append(Obrazok(imageTitle: "", imageUIImage: nil))
+                    }
+                    var poradie = 0
                     for obj in objects! {
-                    print("foo column: \(obj["title"])")
-                    print("foo column: \(obj["imageURL"])")
-                    let imageTitle = obj["title"] as! String
-                    let imageURLString = obj["imageURL"] as! String
+                        print("foo column: \(obj["title"])")
+                        print("foo column: \(obj["imageURL"])")
+                        let imageTitle = obj["title"] as! String
+                        let imageURLString = obj["imageURL"] as! String
                     
-                    dispatch_async(dispatch_get_global_queue(qos, 0)) {
-                    if let imageURL = NSURL(string: imageURLString) {
-                        if let imageData = NSData(contentsOfURL: imageURL) {
-                            self.imageGallery.images.append(Obrazok(imageTitle: imageTitle, imageUIImage: UIImage(data: imageData)))
-                            print("image loaded")
-                            dispatch_async(dispatch_get_main_queue()) {
-                                self.gridView.reloadData()
+                        dispatch_async(dispatch_get_global_queue(qos, 0)) {
+                            if let imageURL = NSURL(string: imageURLString) {
+                                if let imageData = NSData(contentsOfURL: imageURL) {
+                                    self.imageGallery.images[poradie++] = Obrazok(imageTitle: imageTitle, imageUIImage: UIImage(data: imageData))
+                                    print("image loaded")
+                                    dispatch_async(dispatch_get_main_queue()) {
+                                        self.indikator.stopAnimating()
+                                        self.indikator.hidden = true
+                                        self.gridView.reloadData()
                                 
-                            }
+                                    }
                             
-                        } else {
-                            print("failed to load image - data nil")
+                                } else {
+                                    print("failed to load image - data nil")
+                                }
+                            } else {
+                                print("failed to load image - url nil")
+                            }
                         }
-                    } else {
-                        print("failed to load image - url nil")
                     }
-                    }
+                } else {
+                    print("Error fetching objects: \(error)")
                 }
-            } else {
-                print("Error fetching objects: \(error)")
-            }
             }
         }
-        
-        
         
     }
 
@@ -76,9 +83,12 @@ class HubbleCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! HubbleCollectionViewCell
     
         // Configure the cell
-        cell.backgroundColor = UIColor.blackColor()
+        cell.backgroundColor = UIColor.lightGrayColor()
         cell.imageView.image = imageGallery.images[indexPath.row].imageUIImage
-    
+        if cell.imageView.image != nil{
+            cell.cellIndicator.hidden = true
+            cell.cellIndicator.stopAnimating()
+        }
         return cell
     }
 

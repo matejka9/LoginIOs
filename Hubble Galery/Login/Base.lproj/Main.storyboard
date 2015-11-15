@@ -614,7 +614,7 @@
             </objects>
             <point key="canvasLocation" x="-263" y="1780"/>
         </scene>
-        <!--Hubble Collection View Controller-->
+        <!--Hubble Collection-->
         <scene sceneID="SbE-hJ-SzD">
             <objects>
                 <collectionViewController id="CcI-R6-7aI" customClass="HubbleCollectionViewController" customModule="Login" customModuleProvider="target" sceneMemberID="viewController">
@@ -629,6 +629,11 @@
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
+                        <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="OaA-wN-PvO">
+                            <rect key="frame" x="0.0" y="-64" width="320" height="480"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                        </activityIndicatorView>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="1K0-Js-eSr" customClass="HubbleCollectionViewCell" customModule="Login" customModuleProvider="target">
                                 <rect key="frame" x="60" y="64" width="200" height="200"/>
@@ -641,6 +646,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                             <animations/>
                                         </imageView>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="tFB-0p-nXP">
+                                            <rect key="frame" x="90" y="90" width="20" height="20"/>
+                                            <animations/>
+                                        </activityIndicatorView>
                                     </subviews>
                                     <animations/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -653,6 +662,7 @@
                                     <constraint firstItem="tme-T3-I0N" firstAttribute="leading" secondItem="1K0-Js-eSr" secondAttribute="leading" id="sST-rd-dfl"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="cellIndicator" destination="tFB-0p-nXP" id="UUq-gM-LrV"/>
                                     <outlet property="imageView" destination="tme-T3-I0N" id="5ad-rb-YW5"/>
                                     <segue destination="F2P-yG-IBQ" kind="push" identifier="showImage" id="M30-Zd-6Rl"/>
                                 </connections>
@@ -663,7 +673,7 @@
                             <outlet property="delegate" destination="CcI-R6-7aI" id="EHF-dd-5n1"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="J5T-KU-oOX">
+                    <navigationItem key="navigationItem" title="Hubble Collection" id="J5T-KU-oOX">
                         <barButtonItem key="rightBarButtonItem" title="Exit" id="ZNt-9F-E26">
                             <connections>
                                 <segue destination="APR-pm-JMm" kind="unwind" unwindAction="unwindNaLoged:" id="vTj-Oy-9cY"/>
@@ -674,6 +684,7 @@
                     <connections>
                         <outlet property="collectionView" destination="8Ms-fo-Aya" id="A3K-9X-LNn"/>
                         <outlet property="gridView" destination="8Ms-fo-Aya" id="Z4c-r7-6d6"/>
+                        <outlet property="indikator" destination="OaA-wN-PvO" id="n5l-U8-Ea6"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0bB-eY-m8R" userLabel="First Responder" sceneMemberID="firstResponder"/>
