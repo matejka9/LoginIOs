@@ -252,9 +252,9 @@ class ViewController: UIViewController {
                     user.signUpInBackgroundWithBlock {
                         (succeeded: Bool, error: NSError?) -> Void in
                         if let error = error {
-                            let errorString = error.userInfo["error"] as? NSString
+                            let errorString = error.userInfo["error"] as! NSString
                             print(errorString)
-                            let alert = UIAlertController(title: "Not Ok", message: "Taký uživateľ už existuje.", preferredStyle: UIAlertControllerStyle.Alert)
+                            let alert = UIAlertController(title: "Not Ok", message: "\(errorString)", preferredStyle: UIAlertControllerStyle.Alert)
                             alert.addAction(UIAlertAction(title: "Pokračuj.", style: UIAlertActionStyle.Default, handler: nil))
                             self.presentViewController(alert, animated: true, completion: nil)
                         } else {
@@ -266,6 +266,9 @@ class ViewController: UIViewController {
                             let callActionHandler = { (action:UIAlertAction!) -> Void in
                                 if let presentingViewController = self.presentingViewController {
                                     presentingViewController.dismissViewControllerAnimated(true, completion: nil)
+                                    let parent = presentingViewController as! LoginViewController
+                                    parent.login.text = self.textMeno.text
+                                    parent.heslo.text = self.textHeslo.text
                                 } else {
                                     let loginVC = self.storyboard?.instantiateViewControllerWithIdentifier("Login")
                                     self.presentViewController(loginVC!, animated: true, completion: nil)

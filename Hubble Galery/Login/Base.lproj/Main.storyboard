@@ -285,6 +285,7 @@
                         <outlet property="textMeno" destination="d7I-yQ-TaQ" id="CHF-Ks-xMc"/>
                         <outlet property="vysledokHodnoteniaHeslo" destination="lyZ-XG-5AJ" id="rs3-s1-eQy"/>
                         <segue destination="fsR-EL-8eA" kind="modal" identifier="prejdiNaLoged" id="4H2-Io-KbL"/>
+                        <segue destination="1u7-6U-OHu" kind="modal" identifier="prejdiNaLogin" id="OeY-wv-pWI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -529,14 +530,14 @@
                                 <rect key="frame" x="53" y="240" width="214" height="0.0"/>
                                 <animations/>
                                 <gestureRecognizers/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iUk-ap-N6v">
                                 <rect key="frame" x="74" y="95" width="242" height="46"/>
                                 <animations/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="21"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
