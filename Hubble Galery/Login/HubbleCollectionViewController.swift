@@ -20,42 +20,40 @@ class HubbleCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         
         let qos = Int(QOS_CLASS_USER_INTERACTIVE.rawValue)
-        dispatch_async(dispatch_get_global_queue(qos, 0)) {
             
-            let query = PFQuery(className: "HubbleGallery")
-            query.findObjectsInBackgroundWithBlock() { (objects, error) in
+        let query = PFQuery(className: "HubbleGallery")
+        query.findObjectsInBackgroundWithBlock() { (objects, error) in
+            dispatch_async(dispatch_get_global_queue(qos, 0)) {
                 if error == nil {
                     // success
                     print("fetched \(objects?.count) objects")
                     for obj in objects! {
-                        print("foo column: \(obj["title"])")
-                        print("foo column: \(obj["imageURL"])")
-                        let imageTitle = obj["title"] as! String
-                        let imageURLString = obj["imageURL"] as! String
-                        
-                        dispatch_async(dispatch_get_global_queue(qos, 0)) {
-                        if let imageURL = NSURL(string: imageURLString) {
-                            if let imageData = NSData(contentsOfURL: imageURL) {
+                    print("foo column: \(obj["title"])")
+                    print("foo column: \(obj["imageURL"])")
+                    let imageTitle = obj["title"] as! String
+                    let imageURLString = obj["imageURL"] as! String
+                    
+                    dispatch_async(dispatch_get_global_queue(qos, 0)) {
+                    if let imageURL = NSURL(string: imageURLString) {
+                        if let imageData = NSData(contentsOfURL: imageURL) {
+                            self.imageGallery.images.append(Obrazok(imageTitle: imageTitle, imageUIImage: UIImage(data: imageData)))
+                            print("image loaded")
+                            dispatch_async(dispatch_get_main_queue()) {
+                                self.gridView.reloadData()
                                 
-                                
-                                    self.imageGallery.images.append(Obrazok(imageTitle: imageTitle, imageUIImage: UIImage(data: imageData)))
-                                    print("image loaded")
-                                    dispatch_async(dispatch_get_main_queue()) {
-                                        self.gridView.reloadData()
-                                    
-                                }
-                                
-                            } else {
-                                print("failed to load image - data nil")
                             }
+                            
                         } else {
-                            print("failed to load image - url nil")
+                            print("failed to load image - data nil")
                         }
-                        }
+                    } else {
+                        print("failed to load image - url nil")
                     }
-                } else {
-                    print("Error fetching objects: \(error)")
+                    }
                 }
+            } else {
+                print("Error fetching objects: \(error)")
+            }
             }
         }
         
