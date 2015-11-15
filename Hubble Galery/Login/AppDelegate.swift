@@ -15,7 +15,11 @@ import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    let userName = "login"
+    let userPassword = "password"
+    let loggedNormal = "logedNormal"
+    let tweetName = "tweetName"
+    
     var window: UIWindow?
 
     // ================================================= FACEBOOK DOPLNENE ====================================================
@@ -27,8 +31,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.setApplicationId("SyRQxmvs6dAajREWbACWY9e1y1L9uX07qwE92Zo1", clientKey: "Q9itfo4yGvA3UXisXYBkS1zf147eHTMAo1eEhiXV")
         
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        
+        var initialVC: UIViewController
+        
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let tweetName = defaults.stringForKey(self.tweetName)
+        if (FBSDKAccessToken.currentAccessToken() != nil || defaults.boolForKey(loggedNormal) || tweetName != nil){
+            initialVC = storyBoard.instantiateViewControllerWithIdentifier("Loged")
+        }else if (defaults.stringForKey(userName) != nil){
+            initialVC = storyBoard.instantiateViewControllerWithIdentifier("Login")
+        }else{
+            initialVC = storyBoard.instantiateViewControllerWithIdentifier("Register")
+        }
+        
+        window?.rootViewController = initialVC
+        window?.makeKeyAndVisible()
+        
+        return true
     }
     
     func application(application: UIApplication,

@@ -14,7 +14,7 @@ class HubbleCollectionViewController: UICollectionViewController {
     private let reuseIdentifier = "ImageCell"
     private var imageGallery = HubbleGallery()
 
-    @IBOutlet var gridView: UICollectionView!
+    @IBOutlet weak var gridView: UICollectionView!
     
     @IBOutlet weak var indikator: UIActivityIndicatorView!
     

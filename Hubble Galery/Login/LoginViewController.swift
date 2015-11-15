@@ -10,19 +10,25 @@ import UIKit
 import CoreData
 import FBSDKLoginKit
 import TwitterKit
+import Parse
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     let userName = "login"
-    
-    var poslanyLogin = String()
-    var poslaneHeslo = String()
+    let userPassword = "password"
+    let loggedNormal = "logedNormal"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(white: 1.0, alpha: 1.0)
-        login.text = poslanyLogin
-        heslo.text = poslaneHeslo
         
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let name = defaults.stringForKey(self.userName)
+        let pass = defaults.stringForKey(self.userPassword)
+        
+        if (name != nil && pass != nil){
+            login.text = name
+            heslo.text = pass
+        }
         
         //FB Button
         let loginView : FBSDKLoginButton = FBSDKLoginButton()
@@ -44,7 +50,12 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         
                 
                 dispatch_async(dispatch_get_main_queue(), {
-                    self.performSegueWithIdentifier("pouziTweetLogin", sender: self)
+                    if let presentingViewController = self.presentingViewController as? LogedViewController {
+                        presentingViewController.dismissViewControllerAnimated(true, completion: nil)
+                    } else {
+                        let loginVC = self.storyboard?.instantiateViewControllerWithIdentifier("Loged")
+                        self.presentViewController(loginVC!, animated: true, completion: nil)
+                    }
                 })
             } else {
                 print("error: \(error!.localizedDescription)");
@@ -95,7 +106,12 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                         defaults.setObject(urlObrazok, forKey: "facebookPictureUrl")
                         
                         
-                        self.performSegueWithIdentifier("pouziFbLogin", sender: self)
+                        if let presentingViewController = self.presentingViewController as? LogedViewController {
+                            presentingViewController.dismissViewControllerAnimated(true, completion: nil)
+                        } else {
+                            let loginVC = self.storyboard?.instantiateViewControllerWithIdentifier("Loged")
+                            self.presentViewController(loginVC!, animated: true, completion: nil)
+                        }
                     }
                 })
             }
@@ -119,47 +135,50 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "pouziLogin"){
-            let defaults = NSUserDefaults.standardUserDefaults()
-            defaults.setObject(self.login.text!, forKey: "login")
         }
     }
     
     //-----------------------------------------############ Prihlasovanie ############----------------------------------------
     @IBAction func logIn(sender: UIButton) {
-        let appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
-        let context:NSManagedObjectContext = appDel.managedObjectContext
         
-        let request = NSFetchRequest(entityName: "Users")
-        request.returnsObjectsAsFaults = false
-        
-        request.predicate = NSPredicate(format: "login = %@ AND password = %@", login.text!, heslo.text!)
-        
-        do{
-            let results: NSArray = try context.executeFetchRequest(request)
-            
-            if (results.count > 0){
-                //Ulozim si uzivatela
+        PFUser.logInWithUsernameInBackground(self.login.text!, password:self.heslo.text!) {
+            (user: PFUser?, error: NSError?) -> Void in
+            if user != nil {
+                // Do stuff after successful login.
                 let defaults = NSUserDefaults.standardUserDefaults()
-                defaults.setObject(login.text, forKey: userName)
+                defaults.setObject(self.login.text, forKey: self.userName)
+                defaults.setObject(self.heslo.text, forKey: self.userPassword)
+                defaults.setBool(true, forKey: self.loggedNormal)
                 
-                self.performSegueWithIdentifier("pouziLogin", sender: self)
-            }else{
+                if let presentingViewController = self.presentingViewController as? LogedViewController {
+                    presentingViewController.dismissViewControllerAnimated(true, completion: nil)
+                } else {
+                    let loginVC = self.storyboard?.instantiateViewControllerWithIdentifier("Loged")
+                    self.presentViewController(loginVC!, animated: true, completion: nil)
+                }
+            } else {
                 let alert = UIAlertController(title: "Error", message: "Meno a heslo nesedia.", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Späť", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)           }
-        }catch{
-            print(error)
-        }
+            }
     }
     
+    @IBAction func signUp(sender: AnyObject) {
+        if let presentingViewController = self.presentingViewController as? ViewController {
+            presentingViewController.dismissViewControllerAnimated(true, completion: nil)
+        } else {
+            let loginVC = self.storyboard?.instantiateViewControllerWithIdentifier("Register")
+            self.presentViewController(loginVC!, animated: true, completion: nil)
+        }
+    }
     //-----------------------------------------############ END EDITING ############----------------------------------------
     @IBAction func skriKlavesnicu(sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }
     
-    //-----------------------------------------############ VRAT SA SPAT ############----------------------------------------
+    /*//-----------------------------------------############ VRAT SA SPAT ############----------------------------------------
     
     @IBAction func unwindNaLogIn(segue: UIStoryboardSegue) {
         
-    }
+    }*/
 }

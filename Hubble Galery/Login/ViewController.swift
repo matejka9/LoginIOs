@@ -9,9 +9,12 @@
 import UIKit
 import CoreData
 import FBSDKLoginKit
+import Parse
 
 class ViewController: UIViewController {
     let userName = "login"
+    let userPassword = "password"
+    let loggedNormal = "logedNormal"
     let tweetName = "tweetName"
     
     override func viewDidLoad() {
@@ -20,14 +23,7 @@ class ViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let name = defaults.stringForKey(self.userName)
-        let tweetName = defaults.stringForKey(self.tweetName)
-        if (FBSDKAccessToken.currentAccessToken() != nil || name != nil || tweetName != nil)
-        {
-            // User is already logged in, do work such as go to next view controller.
-            self.performSegueWithIdentifier("prejdiNaLoged", sender: self)
-        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -231,12 +227,15 @@ class ViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "prejdiNaLogin"){
-            let DestViewController: LoginViewController = segue.destinationViewController as! LoginViewController
-            DestViewController.poslanyLogin = self.textMeno.text!
-            DestViewController.poslaneHeslo = self.textHeslo.text!
-        }else if (segue.identifier == "prejdiNaLoged"){
-            let DestViewController: LogedViewController = segue.destinationViewController as! LogedViewController
-            DestViewController.vstupnyView = "ViewController"
+            //Nothing to do
+        }
+    }
+    @IBAction func signIn(sender: AnyObject) {
+        if let presentingViewController = self.presentingViewController {
+            presentingViewController.dismissViewControllerAnimated(true, completion: nil)
+        } else {
+            let loginVC = self.storyboard?.instantiateViewControllerWithIdentifier("Login")
+            self.presentViewController(loginVC!, animated: true, completion: nil)
         }
     }
     
@@ -244,28 +243,25 @@ class ViewController: UIViewController {
         if (jeDobreMeno()){
             if (skontrolujEmail()){
                 if (jeFunkcneHeslo()){
-                    let appDel:AppDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
-                    let context:NSManagedObjectContext = appDel.managedObjectContext
                     
-                    let request = NSFetchRequest(entityName: "Users")
-                    request.returnsObjectsAsFaults = false
-                    request.predicate = NSPredicate(format: "login = %@", textMeno.text!)
+                    let user = PFUser()
+                    user.username = self.textMeno.text
+                    user.password = self.textHeslo.text
+                    user.email = self.textMail.text
                     
-                    do{
-                        let results: NSArray = try context.executeFetchRequest(request)
-                        
-                        if (results.count > 0){
+                    user.signUpInBackgroundWithBlock {
+                        (succeeded: Bool, error: NSError?) -> Void in
+                        if let error = error {
+                            let errorString = error.userInfo["error"] as? NSString
+                            print(errorString)
                             let alert = UIAlertController(title: "Not Ok", message: "Taký uživateľ už existuje.", preferredStyle: UIAlertControllerStyle.Alert)
                             alert.addAction(UIAlertAction(title: "Pokračuj.", style: UIAlertActionStyle.Default, handler: nil))
                             self.presentViewController(alert, animated: true, completion: nil)
-                        }else{
-                            let newUser = NSEntityDescription.insertNewObjectForEntityForName("Users", inManagedObjectContext: context) as NSManagedObject
-                            
-                            newUser.setValue(textMeno.text, forKey: "login")
-                            newUser.setValue(textMail.text, forKey: "mail")
-                            newUser.setValue(textHeslo.text, forKey: "password")
-                            try context.save()
-                            
+                        } else {
+                            print("Registrovany")
+                            let defaults = NSUserDefaults.standardUserDefaults()
+                            defaults.setObject(self.textMeno.text, forKey: self.userName)
+                            defaults.setObject(self.textHeslo.text, forKey: self.userPassword)
                             let alert = UIAlertController(title: "Ok", message: "Váš účet bol vytvorený. Budete presmerovaný na login.", preferredStyle: UIAlertControllerStyle.Alert)
                             let callActionHandler = { (action:UIAlertAction!) -> Void in
                                 self.performSegueWithIdentifier("prejdiNaLogin", sender: self);
@@ -274,10 +270,7 @@ class ViewController: UIViewController {
                             
                             self.presentViewController(alert, animated: true, completion: nil)
                         }
-                    }catch{
-                        print(error)
                     }
-
                 }else{
                     if (!zkontrolujHeslo()){
                         let alert = UIAlertController(title: "Zlé heslo", message: "Heslo musí obsahodať aspoň 6 znakov.", preferredStyle: UIAlertControllerStyle.Alert)
@@ -302,10 +295,10 @@ class ViewController: UIViewController {
         }
     }
     
-    //-----------------------------------------############ VRAT SA SPAT ############----------------------------------------
+   /* //-----------------------------------------############ VRAT SA SPAT ############----------------------------------------
     
     @IBAction func unwindNaRegistraciu(segue: UIStoryboardSegue) {
         
-    }
+    }*/
 }
 

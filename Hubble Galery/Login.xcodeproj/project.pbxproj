@@ -22,6 +22,7 @@
 		4D5B6C1C1BF7B31200CF978E /* hubble7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D5B6C121BF7B31200CF978E /* hubble7.jpg */; };
 		4D5B6C1D1BF7B31200CF978E /* hubble8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D5B6C131BF7B31200CF978E /* hubble8.jpg */; };
 		4D5B6C1E1BF7B31200CF978E /* hubble9.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 4D5B6C141BF7B31200CF978E /* hubble9.jpg */; };
+		4D5B6C201BF8E27F00CF978E /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5B6C1F1BF8E27F00CF978E /* NavigationViewController.swift */; };
 		4DDD463E1BD14BA1005FEEE3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD463D1BD14BA1005FEEE3 /* AppDelegate.swift */; };
 		4DDD46401BD14BA1005FEEE3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD463F1BD14BA1005FEEE3 /* ViewController.swift */; };
 		4DDD46431BD14BA1005FEEE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DDD46411BD14BA1005FEEE3 /* Main.storyboard */; };
@@ -48,6 +49,7 @@
 		4D5B6C121BF7B31200CF978E /* hubble7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hubble7.jpg; sourceTree = "<group>"; };
 		4D5B6C131BF7B31200CF978E /* hubble8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hubble8.jpg; sourceTree = "<group>"; };
 		4D5B6C141BF7B31200CF978E /* hubble9.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = hubble9.jpg; sourceTree = "<group>"; };
+		4D5B6C1F1BF8E27F00CF978E /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		4DDD463A1BD14BA1005FEEE3 /* Login.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Login.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DDD463D1BD14BA1005FEEE3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DDD463F1BD14BA1005FEEE3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				4D022D5F1BD5061600099680 /* LogedViewController.swift */,
 				4D022D4D1BD418A100099680 /* Bridging-Header.h */,
 				4DDD46411BD14BA1005FEEE3 /* Main.storyboard */,
+				4D5B6C1F1BF8E27F00CF978E /* NavigationViewController.swift */,
 				4D5B6C021BF791B200CF978E /* HubbleCollectionViewController.swift */,
 				4D5B6C041BF791BD00CF978E /* HubbleCollectionViewCell.swift */,
 				4D5B6C061BF791C200CF978E /* HubbleGallery.swift */,
@@ -299,6 +302,7 @@
 				4D5B6C051BF791BD00CF978E /* HubbleCollectionViewCell.swift in Sources */,
 				4D5B6C091BF791C900CF978E /* HubbleImageViewController.swift in Sources */,
 				4D5B6C031BF791B200CF978E /* HubbleCollectionViewController.swift in Sources */,
+				4D5B6C201BF8E27F00CF978E /* NavigationViewController.swift in Sources */,
 				4DDD46461BD14BA1005FEEE3 /* Login.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

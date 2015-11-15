@@ -15,7 +15,8 @@ class LogedViewController: UIViewController {
     let facebookMail = "facebookMail"
     let facebookName = "facebookName"
     let facebookUrlPicture = "facebookPictureUrl"
-
+    
+    let loggedNormal = "logedNormal"
     
     var vstupnyView = String()
     
@@ -48,8 +49,10 @@ class LogedViewController: UIViewController {
                 }
             }
         }
-        if let login = defaults.valueForKey(userName) as? String{
-            labelLogin.text = "Login: " + login
+        if defaults.boolForKey(loggedNormal){
+            if let login = defaults.valueForKey(userName) as? String{
+                labelLogin.text = "Login: " + login
+            }
         }
     }
     
@@ -64,17 +67,18 @@ class LogedViewController: UIViewController {
             }
             
             let defaults = NSUserDefaults.standardUserDefaults()
-            defaults.setObject(nil, forKey: self.userName)
+            defaults.setBool(false, forKey: self.loggedNormal)
             defaults.setObject(nil, forKey: self.facebookMail)
             defaults.setObject(nil, forKey: self.facebookName)
             defaults.setObject(nil, forKey: self.tweetName)
             defaults.setObject(nil, forKey: self.facebookUrlPicture)
             
             
-            if (self.vstupnyView == "ViewController"){
-                self.performSegueWithIdentifier("unwindReg", sender: self)
-            }else{
-                self.performSegueWithIdentifier("unwindLogIn", sender: self)
+            if let presentingViewController = self.presentingViewController {
+                presentingViewController.dismissViewControllerAnimated(true, completion: nil)
+            } else {
+                let loginVC = self.storyboard?.instantiateViewControllerWithIdentifier("Login")
+                self.presentViewController(loginVC!, animated: true, completion: nil)
             }
         }
         alert.addAction(UIAlertAction(title: "Áno", style: UIAlertActionStyle.Default, handler: callActionHandler))
