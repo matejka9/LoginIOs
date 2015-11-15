@@ -1,0 +1,13 @@
+#platform :ios, '8.0'
+use_frameworks!
+
+target 'Login' do
+  pod 'Parse'
+  pod 'IQKeyboardManagerSwift', '3.3.4'
+  pod 'FBSDKCoreKit'
+  pod 'FBSDKLoginKit'
+  pod 'FBSDKShareKit'
+  pod 'Fabric'
+  pod 'TwitterKit'
+  pod 'TwitterCore'
+end

@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "02A80C46CB29654D9C84CB354C4B718F818E8381",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "2D19247F2DA20CF1F36FEE2F09CD9A66E1680F90" : 0,
+    "02A80C46CB29654D9C84CB354C4B718F818E8381" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "F5B243C7-1F4C-4D15-92F2-A11932F64940",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "2D19247F2DA20CF1F36FEE2F09CD9A66E1680F90" : "..\/VmaIos\/vma-ios-2015",
+    "02A80C46CB29654D9C84CB354C4B718F818E8381" : "LoginIOs\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Login",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Hubble Galery\/Login.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/matejka9\/LoginIOs.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "02A80C46CB29654D9C84CB354C4B718F818E8381"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ihla\/vma-ios-2015.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2D19247F2DA20CF1F36FEE2F09CD9A66E1680F90"
+    }
+  ]
+}
