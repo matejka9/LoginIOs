@@ -264,7 +264,12 @@ class ViewController: UIViewController {
                             defaults.setObject(self.textHeslo.text, forKey: self.userPassword)
                             let alert = UIAlertController(title: "Ok", message: "Váš účet bol vytvorený. Budete presmerovaný na login.", preferredStyle: UIAlertControllerStyle.Alert)
                             let callActionHandler = { (action:UIAlertAction!) -> Void in
-                                self.performSegueWithIdentifier("prejdiNaLogin", sender: self);
+                                if let presentingViewController = self.presentingViewController {
+                                    presentingViewController.dismissViewControllerAnimated(true, completion: nil)
+                                } else {
+                                    let loginVC = self.storyboard?.instantiateViewControllerWithIdentifier("Login")
+                                    self.presentViewController(loginVC!, animated: true, completion: nil)
+                                }
                             }
                             alert.addAction(UIAlertAction(title: "Pokračuj", style: UIAlertActionStyle.Default, handler: callActionHandler))
                             

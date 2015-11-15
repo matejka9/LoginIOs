@@ -9,6 +9,8 @@
 #ifndef Bridging_Header_h
 #define Bridging_Header_h
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <Parse/Parse.h>
