@@ -30,9 +30,11 @@
 		4DDD46481BD14BA1005FEEE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DDD46471BD14BA1005FEEE3 /* Assets.xcassets */; };
 		4DDD464B1BD14BA1005FEEE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DDD46491BD14BA1005FEEE3 /* LaunchScreen.storyboard */; };
 		4DDD46571BD152F9005FEEE3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD46561BD152F9005FEEE3 /* LoginViewController.swift */; };
+		93224720193A894E0283F138 /* Pods_Login.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F30CB1F05380B515F4E36FB /* Pods_Login.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F30CB1F05380B515F4E36FB /* Pods_Login.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Login.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D022D4D1BD418A100099680 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		4D022D5F1BD5061600099680 /* LogedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogedViewController.swift; sourceTree = "<group>"; };
 		4D5B6C021BF791B200CF978E /* HubbleCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HubbleCollectionViewController.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93224720193A894E0283F138 /* Pods_Login.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,6 +138,7 @@
 		7AB8794F58BA3457C59FA850 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2F30CB1F05380B515F4E36FB /* Pods_Login.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
