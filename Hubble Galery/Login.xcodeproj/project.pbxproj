@@ -29,17 +29,10 @@
 		4DDD46481BD14BA1005FEEE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DDD46471BD14BA1005FEEE3 /* Assets.xcassets */; };
 		4DDD464B1BD14BA1005FEEE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DDD46491BD14BA1005FEEE3 /* LaunchScreen.storyboard */; };
 		4DDD46571BD152F9005FEEE3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDD46561BD152F9005FEEE3 /* LoginViewController.swift */; };
-		F23A1146B02E1608CB6DEFDB /* Pods_Login.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 231DDD3B97041FF92DEBF298 /* Pods_Login.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		231DDD3B97041FF92DEBF298 /* Pods_Login.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Login.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D022D4A1BD4112300099680 /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IQKeyboardManagerSwift.framework; path = "Pods/../build/Debug-iphoneos/IQKeyboardManagerSwift.framework"; sourceTree = "<group>"; };
 		4D022D4D1BD418A100099680 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
-		4D022D4E1BD422CC00099680 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "Pods/../build/Debug-iphoneos/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
-		4D022D501BD422D200099680 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "Pods/../build/Debug-iphoneos/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
-		4D022D521BD422D600099680 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "Pods/../build/Debug-iphoneos/FBSDKShareKit.framework"; sourceTree = "<group>"; };
-		4D022D561BD4262800099680 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "Pods/../build/Debug-iphoneos/Bolts.framework"; sourceTree = "<group>"; };
 		4D022D5F1BD5061600099680 /* LogedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogedViewController.swift; sourceTree = "<group>"; };
 		4D5B6C021BF791B200CF978E /* HubbleCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HubbleCollectionViewController.swift; sourceTree = "<group>"; };
 		4D5B6C041BF791BD00CF978E /* HubbleCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HubbleCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -73,7 +66,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F23A1146B02E1608CB6DEFDB /* Pods_Login.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,12 +132,6 @@
 		7AB8794F58BA3457C59FA850 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4D022D561BD4262800099680 /* Bolts.framework */,
-				4D022D521BD422D600099680 /* FBSDKShareKit.framework */,
-				4D022D501BD422D200099680 /* FBSDKLoginKit.framework */,
-				4D022D4E1BD422CC00099680 /* FBSDKCoreKit.framework */,
-				4D022D4A1BD4112300099680 /* IQKeyboardManagerSwift.framework */,
-				231DDD3B97041FF92DEBF298 /* Pods_Login.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
