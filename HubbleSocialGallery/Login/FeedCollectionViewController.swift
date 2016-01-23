@@ -25,47 +25,51 @@ class FeedCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.activityIndicator.hidden = false
-        self.activityIndicator.startAnimating()
+        let qos = Int(QOS_CLASS_USER_INTERACTIVE.rawValue)
+        dispatch_async(dispatch_get_global_queue(qos, 0)) {
+            self.activityIndicator.hidden = false
+            self.activityIndicator.startAnimating()
         
-        let query = PFQuery(className: "Post")
+            let query = PFQuery(className: "Post")
         
-        var followers = [AnyObject]()
-        var index = 0
-        for object in checked{
-            if object == true{
-                followers.append(pole.uzivatelia[index].objectId!)
+            var followers = [AnyObject]()
+            var index = 0
+            for object in self.checked{
+                if object == true{
+                    followers.append(self.pole.uzivatelia[index].objectId!)
+                }
+                index++
             }
-            index++
-        }
         
-        query.whereKey("userId", containedIn: followers)
-        query.findObjectsInBackgroundWithBlock() { (objects, error) in
-            var pocet = 0
-            let koniec = objects!.count
-            if koniec == 0{
-                self.activityIndicator.stopAnimating()
-                self.activityIndicator.hidden = true
-                self.showAlert()
-            }
-            for object in objects!{
-                let imageFile = object["imageFile"] as! PFFile
-                imageFile.getDataInBackgroundWithBlock() { (data, error) in
-                    if let image = UIImage(data: data!) {
-                        self.imageGallery.images.append(Obrazok(imageTitle: object["userName"] as! String, imageUIImage: image))
-                    } else {
-                        print("Error retrieving image")
-                    }
-                    if (++pocet == koniec){
-                        self.activityIndicator.stopAnimating()
-                        self.activityIndicator.hidden = true
-                        self.gridView.reloadData()
-                        print("Koniec : \(koniec))")
+            query.whereKey("userId", containedIn: followers)
+            query.findObjectsInBackgroundWithBlock() { (objects, error) in
+                var pocet = 0
+                let koniec = objects!.count
+                if koniec == 0{
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.hidden = true
+                    self.showAlert()
+                }
+                for object in objects!{
+                    let imageFile = object["imageFile"] as! PFFile
+                    imageFile.getDataInBackgroundWithBlock() { (data, error) in
+                        dispatch_async(dispatch_get_global_queue(qos, 0)) {
+                            if let image = UIImage(data: data!) {
+                                self.imageGallery.images.append(Obrazok(imageTitle: object["userName"] as! String, imageUIImage: image))
+                            } else {
+                                print("Error retrieving image")
+                            }
+                            if (++pocet == koniec){
+                                self.activityIndicator.stopAnimating()
+                                self.activityIndicator.hidden = true
+                                self.gridView.reloadData()
+                                print("Koniec : \(koniec))")
+                            }
+                        }
                     }
                 }
             }
         }
-    
         
     }
     

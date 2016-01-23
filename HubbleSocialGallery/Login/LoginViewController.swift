@@ -17,6 +17,11 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     let userPassword = "password"
     let loggedNormal = "logedNormal"
     
+    @IBOutlet weak var welcomeLabel: UILabel!
+    @IBOutlet weak var constrainWelcomeX: NSLayoutConstraint!
+    
+    @IBOutlet weak var constrainWelcomeY: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(white: 1.0, alpha: 1.0)
@@ -69,6 +74,34 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
         logInButton.center = CGPointMake(bounds.midX + bounds.maxX/4, bounds.maxY - loginView.bounds.height)
         self.view.addSubview(logInButton)
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
+        UIView.animateWithDuration(1.0, delay: 0.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: [.CurveEaseOut, .TransitionCurlUp], animations: {
+            
+            self.constrainWelcomeX.constant -= self.view.bounds.width
+            self.welcomeLabel.transform = CGAffineTransformMakeScale(0.5, 0.5)
+            self.view.layoutIfNeeded()
+            
+            }) { _ in
+                
+                UIView.transitionWithView(self.welcomeLabel, duration: 0.5, options: [.CurveEaseOut, .TransitionCurlDown], animations: {
+                self.welcomeLabel.hidden = false
+                self.welcomeLabel.transform = CGAffineTransformMakeScale(1.0, 1.0)
+                self.constrainWelcomeX.constant += self.view.bounds.width
+                self.view.layoutIfNeeded()
+                }, completion: nil)
+        }
+        
+    }
 
     
     //FB
@@ -109,7 +142,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                         if let presentingViewController = self.presentingViewController as? LogedViewController {
                             presentingViewController.dismissViewControllerAnimated(true, completion: nil)
                         } else {
-                            let loginVC = self.storyboard?.instantiateViewControllerWithIdentifier("Loged")
+                            let loginVC = self.storyboard?.instantiateViewControllerWithIdentifier("TabBarCont")
                             self.presentViewController(loginVC!, animated: true, completion: nil)
                         }
                     }

@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let tweetName = "tweetName"
     
     var window: UIWindow?
+    var notification: UILocalNotification?
+    var somBackground: Bool?
 
     // ================================================= FACEBOOK DOPLNENE ====================================================
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -53,6 +55,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = initialVC
         window?.makeKeyAndVisible()
         
+        // registering
+        somBackground = false
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Sound, .Alert, .Badge], categories: nil))
+        
+        // handling
+        if let localNotification = launchOptions?[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification {
+            print("didFinishLaunchingWithOptions: \(localNotification)")
+            notification = localNotification
+        }
+        
         return true
     }
     
@@ -71,23 +83,62 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 
     func applicationWillResignActive(application: UIApplication) {
+        application.applicationIconBadgeNumber = 0
         
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if (defaults.valueForKey(tweetName) != nil || FBSDKAccessToken.currentAccessToken() != nil || defaults.boolForKey(loggedNormal)){
+            let notification:UILocalNotification = UILocalNotification()
+            notification.fireDate = NSDate(timeIntervalSinceNow: NSTimeInterval(60*60*24))
+            notification.repeatInterval = NSCalendarUnit.Day
+            notification.alertTitle = "Hubble Gallery"
+            notification.alertBody = "Pozri si nové fotografie od našich prispievateľov v Hubble Gallery."
+            notification.applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1
+            notification.soundName = UILocalNotificationDefaultSoundName
+            notification.userInfo = ["payload": "test payload"]
+            UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        }
     }
 
     func applicationDidEnterBackground(application: UIApplication) {
-       
+        somBackground = true
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
-        
+        let app = UIApplication.sharedApplication()
+        for oneEvent in app.scheduledLocalNotifications! {
+            let notification = oneEvent as UILocalNotification
+            app.cancelLocalNotification(notification)
+        }
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
-        
+        somBackground = false
     }
 
     func applicationWillTerminate(application: UIApplication) {
         self.saveContext()
+    }
+    
+    func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
+        print("didRegisterUserNotificationSettings: \(notificationSettings)")
+    }
+    
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+        print("didReceiveLocalNotification: \(notification)")
+        
+        application.applicationIconBadgeNumber = 0
+        
+        presentNotificationAlert(notification.alertTitle, message: notification.alertBody)
+        
+    }
+    
+    private func presentNotificationAlert(title: String?, message: String?) {
+        if somBackground == true{
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            self.window?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+        }
     }
 
     // MARK: - Core Data stack

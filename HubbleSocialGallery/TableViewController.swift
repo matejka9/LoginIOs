@@ -17,31 +17,37 @@ class TableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let users = PFQuery(className: "_User")
         
-        users.whereKey("objectId", notContainedIn: [PFUser.currentUser()!.objectId!])
-        users.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-            
-            if (error == nil){
-                for object in objects!{
-                    self.pole.uzivatelia.append(object as! PFUser)
-                    self.pole.uzivateliaId.append(object.objectId!)
-                    self.checked.append(false)
-                }
+        let qos = Int(QOS_CLASS_USER_INTERACTIVE.rawValue)
+        dispatch_async(dispatch_get_global_queue(qos, 0)) {
+            let users = PFQuery(className: "_User")
+        
+            users.whereKey("objectId", notContainedIn: [PFUser.currentUser()!.objectId!])
+            users.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+                dispatch_async(dispatch_get_global_queue(qos, 0)) {
+                    if (error == nil){
+                        for object in objects!{
+                            self.pole.uzivatelia.append(object as! PFUser)
+                            self.pole.uzivateliaId.append(object.objectId!)
+                            self.checked.append(false)
+                        }
                 
-                let query = PFQuery(className: "Following")
-                query.whereKey("follower", equalTo: PFUser.currentUser()!)
-                query.findObjectsInBackgroundWithBlock() { (objects, error) in
-                    for object in objects!{
-                        let user = object["following"] as! PFUser
-                        self.checked[self.pole.uzivateliaId.indexOf(user.objectId!)!] = true
+                        let query = PFQuery(className: "Following")
+                        query.whereKey("follower", equalTo: PFUser.currentUser()!)
+                        query.findObjectsInBackgroundWithBlock() { (objects, error) in
+                            dispatch_async(dispatch_get_global_queue(qos, 0)) {
+                                for object in objects!{
+                                    let user = object["following"] as! PFUser
+                                    self.checked[self.pole.uzivateliaId.indexOf(user.objectId!)!] = true
+                                }
+                                self.tableView.reloadData()
+                            }
+                        }
+                
+                    }else{
+                        print("Chyba pri query \(error)")
                     }
-                    self.tableView.reloadData()
                 }
-                
-            }else{
-                
             }
         }
     }
@@ -80,6 +86,7 @@ class TableViewController: UITableViewController {
                 let following = PFQuery(className: "Following")
                 following.whereKey("following", equalTo: self.pole.uzivatelia[indexPath.row])
                 following.whereKey("follower", equalTo: PFUser.currentUser()!)
+                
                 following.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
                     for object in objects!{
                         object.deleteInBackground()
@@ -92,7 +99,6 @@ class TableViewController: UITableViewController {
                 following["following"] = self.pole.uzivatelia[indexPath.row]
                 following["follower"] = PFUser.currentUser()
                 following.saveInBackgroundWithBlock() { (success, error) in
-                    // ...
                     
                 }
             }

@@ -77,6 +77,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D3D23DD1C1F4BE60065EE04 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				4DDD463F1BD14BA1005FEEE3 /* ViewController.swift */,
+				4DDD46561BD152F9005FEEE3 /* LoginViewController.swift */,
+				4D022D5F1BD5061600099680 /* LogedViewController.swift */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		4D3D23DE1C1F4C130065EE04 /* HubbleGallery */ = {
+			isa = PBXGroup;
+			children = (
+				4D5B6C021BF791B200CF978E /* HubbleCollectionViewController.swift */,
+				4D5B6C041BF791BD00CF978E /* HubbleCollectionViewCell.swift */,
+				4D5B6C061BF791C200CF978E /* HubbleGallery.swift */,
+				4D5B6C081BF791C900CF978E /* HubbleImageViewController.swift */,
+			);
+			name = HubbleGallery;
+			sourceTree = "<group>";
+		};
+		4D3D23DF1C1F4C290065EE04 /* PostPicker */ = {
+			isa = PBXGroup;
+			children = (
+				4D82C75B1C14537300F7C32A /* PostPicker.swift */,
+				4DAE0FB71C146A740017D09B /* MyImagesCollection.swift */,
+				4DAE0FB91C1470DD0017D09B /* MyImagesCell.swift */,
+			);
+			name = PostPicker;
+			sourceTree = "<group>";
+		};
+		4D3D23E01C1F4C800065EE04 /* Following */ = {
+			isa = PBXGroup;
+			children = (
+				4DAE0FBF1C148A530017D09B /* TableViewController.swift */,
+				4DAE0FC31C148F0D0017D09B /* TableViewCell.swift */,
+				4DAE0FC11C148A700017D09B /* FollowersData.swift */,
+				4DAE0FC71C14980A0017D09B /* FeedCollectionViewController.swift */,
+				4DAE0FC51C1497F00017D09B /* FeedCollectionViewCell.swift */,
+			);
+			name = Following;
+			sourceTree = "<group>";
+		};
 		4D5B6C0A1BF7B31200CF978E /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -106,26 +149,15 @@
 		4DDD463C1BD14BA1005FEEE3 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				4D3D23DD1C1F4BE60065EE04 /* Login */,
+				4D3D23DE1C1F4C130065EE04 /* HubbleGallery */,
+				4D3D23DF1C1F4C290065EE04 /* PostPicker */,
+				4D3D23E01C1F4C800065EE04 /* Following */,
 				4D5B6C0A1BF7B31200CF978E /* Images */,
 				4DDD463D1BD14BA1005FEEE3 /* AppDelegate.swift */,
-				4DDD463F1BD14BA1005FEEE3 /* ViewController.swift */,
-				4DDD46561BD152F9005FEEE3 /* LoginViewController.swift */,
-				4D022D5F1BD5061600099680 /* LogedViewController.swift */,
+				4D5B6C1F1BF8E27F00CF978E /* NavigationViewController.swift */,
 				4D022D4D1BD418A100099680 /* Bridging-Header.h */,
 				4DDD46411BD14BA1005FEEE3 /* Main.storyboard */,
-				4D5B6C1F1BF8E27F00CF978E /* NavigationViewController.swift */,
-				4D5B6C021BF791B200CF978E /* HubbleCollectionViewController.swift */,
-				4D5B6C041BF791BD00CF978E /* HubbleCollectionViewCell.swift */,
-				4D5B6C061BF791C200CF978E /* HubbleGallery.swift */,
-				4D5B6C081BF791C900CF978E /* HubbleImageViewController.swift */,
-				4D82C75B1C14537300F7C32A /* PostPicker.swift */,
-				4DAE0FB71C146A740017D09B /* MyImagesCollection.swift */,
-				4DAE0FB91C1470DD0017D09B /* MyImagesCell.swift */,
-				4DAE0FBF1C148A530017D09B /* TableViewController.swift */,
-				4DAE0FC31C148F0D0017D09B /* TableViewCell.swift */,
-				4DAE0FC11C148A700017D09B /* FollowersData.swift */,
-				4DAE0FC71C14980A0017D09B /* FeedCollectionViewController.swift */,
-				4DAE0FC51C1497F00017D09B /* FeedCollectionViewCell.swift */,
 				4DDD46471BD14BA1005FEEE3 /* Assets.xcassets */,
 				4DDD46491BD14BA1005FEEE3 /* LaunchScreen.storyboard */,
 				4DDD464C1BD14BA1005FEEE3 /* Info.plist */,

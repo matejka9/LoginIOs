@@ -44,17 +44,20 @@ class PostPicker: UIViewController, UIImagePickerControllerDelegate, UINavigatio
             self.activityIndikator.startAnimating()
             self.view.userInteractionEnabled = false
             self.tabBarController?.tabBar.userInteractionEnabled = false
+            //let qos = Int(QOS_CLASS_USER_INTERACTIVE.rawValue)
             post.saveInBackgroundWithBlock{(success, error) -> Void in
-                if (error != nil){
-                    print("Chyba pri odosielani fotky")
-                }else{
-                    print("Fotka bola uspesne odoslana")
-                }
-                self.activityIndikator.stopAnimating()
-                self.view.userInteractionEnabled = true
-                self.activityIndikator.hidden = true
-                self.tabBarController?.tabBar.userInteractionEnabled = true
-                self.imagePreview.image = self.imageFirst
+                //dispatch_async(dispatch_get_global_queue(qos, 0)) {
+                    if (error != nil){
+                        print("Chyba pri odosielani fotky")
+                    }else{
+                        print("Fotka bola uspesne odoslana")
+                    }
+                    self.activityIndikator.stopAnimating()
+                    self.view.userInteractionEnabled = true
+                    self.activityIndikator.hidden = true
+                    self.tabBarController?.tabBar.userInteractionEnabled = true
+                    self.imagePreview.image = self.imageFirst
+               // }
             }
         }
         

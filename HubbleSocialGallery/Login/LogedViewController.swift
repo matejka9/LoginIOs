@@ -55,6 +55,7 @@ class LogedViewController: UIViewController {
                 labelLogin.text = "Login: " + login
             }
         }
+        
     }
     
     

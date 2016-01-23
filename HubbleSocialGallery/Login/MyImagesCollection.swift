@@ -21,31 +21,38 @@ class MyImagesCollection: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let qos = Int(QOS_CLASS_USER_INTERACTIVE.rawValue)
+
+        
         let query = PFQuery(className: "Post")
         query.whereKey("userId", equalTo: (PFUser.currentUser()?.objectId)!)
         indikator.startAnimating()
         query.findObjectsInBackgroundWithBlock() { (objects, error) in
-            if (error == nil){
-                var pocet = 0
-                let koniec = objects?.count
-                for object in objects!{
-                    let imageFile = object["imageFile"] as! PFFile
-                    imageFile.getDataInBackgroundWithBlock() { (data, error) in
-                        if let image = UIImage(data: data!) {
-                            self.imageGallery.images.append(Obrazok(imageTitle: "My Image", imageUIImage: image))
-                        } else {
-                            print("Error retrieving image")
-                        }
-                        if (++pocet == koniec){
-                            self.indikator.stopAnimating()
-                            self.indikator.hidden = true
-                            self.gridView.reloadData()
-                            print("Data bolo nacitane pocet: \(koniec)")
+            dispatch_async(dispatch_get_global_queue(qos, 0)) {
+                if (error == nil){
+                    var pocet = 0
+                    let koniec = objects?.count
+                    for object in objects!{
+                        let imageFile = object["imageFile"] as! PFFile
+                        imageFile.getDataInBackgroundWithBlock() { (data, error) in
+                            dispatch_async(dispatch_get_global_queue(qos, 0)) {
+                                if let image = UIImage(data: data!) {
+                                    self.imageGallery.images.append(Obrazok(imageTitle: "My Image", imageUIImage: image))
+                                } else {
+                                    print("Error retrieving image")
+                                }
+                                if (++pocet == koniec){
+                                    self.indikator.stopAnimating()
+                                    self.indikator.hidden = true
+                                    self.gridView.reloadData()
+                                    print("Data bolo nacitane pocet: \(koniec)")
+                                }
+                            }
                         }
                     }
+                }else {
+                    print("Error fetching objects: \(error)")
                 }
-            }else {
-                print("Error fetching objects: \(error)")
             }
         }
     }
